@@ -3,8 +3,10 @@
     import { mdiStar, mdiAccount, mdiMail, mdiBriefcase, mdiFileDocument, mdiChevronDown,mdiPencil, mdiDelete, mdiCog, mdiFileDocumentOutline,mdiContentCopy } from '@mdi/js';
     import { computed, ref, watch } from 'vue'
     import { useCoursesStore } from './../stores/courses';
+    import router from './../router';
 
     const coursesStore = useCoursesStore()
+    coursesStore.getCoursesWithProgress();
     computed(() => coursesStore.courses)
 
     const entities_name1 = ref(['материалов','материал','материала']);
@@ -31,6 +33,10 @@
         return str;
     }
 
+    const routeToCourse = (id) => {
+        router.push({name: 'CoursePage', params: {'courseId': id}})
+    }
+
 </script>
 
 <template>
@@ -47,7 +53,7 @@
                             <div class="bg-slate-600 text-white p-1 text-sm">
                                 <span>{{ getDate(course.date_start)  }}</span>
                             </div>
-                            <div class="text-lg text-nowrap text-ellipsis overflow-hidden">{{ course.name }}</div>
+                            <div class="text-lg text-nowrap text-ellipsis overflow-hidden" @click="routeToCourse(course.course_id)">{{ course.name }}</div>
                         </div>
                         <div class="flex items-center">
                             <BaseIcon :path="mdiStar"  :size="20" class="text-yellow-400"/>

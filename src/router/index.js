@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Admin from "../pages/admin.vue";
 import Courses from "../pages/courses.vue";
-
+import CoursePage from "../pages/view_course.vue";
 
 
 const routes = [
@@ -31,7 +31,15 @@ const routes = [
     props: {
       pageTitle: 'Courses page',
     },
-  }
+  },
+  {
+    path: '/courses/view-course/:courseId',
+    name: 'CoursePage',
+    component: CoursePage,
+    props: {
+      pageTitle: 'Course page',
+    },
+  },
   
 ]
 
