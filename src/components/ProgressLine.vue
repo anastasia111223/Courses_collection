@@ -19,18 +19,19 @@ const props = defineProps({
     required: false
   }
 })
-const progressWidth = computed(() => progress>0? `w-${Math.trunc(progress*12)}/12` : 'w-0')
-const spanClass = computed(() => `${progressWidth} ${props.h} ${colorProgress || ''}`)
-// const divClass = computed(() => props.size ?? 16)
+const progressWidth = computed(() => {
+  if (props.progress>0) return Math.trunc(props.progress*100) 
+  else return 1
+})
+const spanClass = computed(() => ` ${props.h} ${props?.colorProgress || 'bg-violet-900'}`)
+
 const divClass = computed(() =>`flex ${props.w} ${props.h}`)
-
-
 
 </script>
 
 <template>
   <div :class="divClass">
-    <div :class="spanClass" v-if="!!progress">
+    <div :class="spanClass" v-if="Number(props.progress)" :style="{'width': `${progressWidth}%`}">
     </div>
   </div>
 </template>
