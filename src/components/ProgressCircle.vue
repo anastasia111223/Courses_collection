@@ -1,6 +1,7 @@
 <script setup>
   import { mdiStar,mdiCalendarCheckOutline,mdiAbTesting,mdiTextBoxOutline,mdiVideoBox, mdiFileDocument,mdiFileDocumentOutline } from '@mdi/js';
   import { computed,useTemplateRef, onMounted } from 'vue'
+  import BaseIcon from './BaseIcon.vue';
 
   const props = defineProps({
     progress: {
@@ -57,14 +58,19 @@
   // document.querySelector(".circular-progress").style.background = `
   //   conic-gradient(${props?.colorProgress} ${3.6 * progressStartEnd}deg, #fff 0deg)`;
 
-  
+  function getIcon(val) {
+    if (val == 'video') return mdiVideoBox 
+    else if (val == 'test') return mdiAbTesting
+    else if (val == 'task') return mdiCalendarCheckOutline
+    else if (val == 'info') return mdiTextBoxOutline
+  }
 
 </script>
 
 <template>
   <div class="flex justify-between w-full gap-3">
     <div class="flex items-center justify-center relative rounded-full bg-slate-200" :class="divClass" ref="circular">
-      <BaseIcon :path="mdiVideoBox"  :size="16" class="text-slate-200"/>
+      <BaseIcon :path="getIcon(icon)"  :size="22" class="text-slate-200 absolute z-10"/>
         <!-- <span class="course-value" style="color:${course.color}">0%</span> -->
     </div>
     <div>

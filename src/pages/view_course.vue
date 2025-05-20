@@ -37,6 +37,7 @@
                 let obj = {
                     ind: indK,
                     name: nameTasks.value[key],
+                    type: key,
                     count: course.value.type_task[key].count,
                     progress: course.value.type_task[key].progress,
                 }
@@ -115,7 +116,7 @@
                 <div class="text-left text-slate-400">{{ `Затрачено времени: ${getTime(course?.time_task)}` }}</div>
                 <div class="flex justify-between w-full mt-6">
                     <div v-for="tp in typesTask" :key="tp.ind+'t'">
-                        <ProgressCircle :progress="tp.progress? tp.progress : 0" :count="tp.count" :text="tp.name"/>
+                        <ProgressCircle :progress="tp.progress? tp.progress : 0" :count="tp.count" :text="tp.name" :icon="tp.type"/>
                     </div>
                 </div>
                 <div class="text-left text-slate-500 text-lg font-medium mt-8">Содержание курса</div>
